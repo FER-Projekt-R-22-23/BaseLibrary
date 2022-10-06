@@ -14,9 +14,9 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
-      run: dotnet restore /home/runner/work/BaseLibrary/BaseLibrary/BaseLibrary
+      run: dotnet restore ./BaseLibrary/BaseLibrary.sln
     - name: Build
-      run: dotnet build /home/runner/work/BaseLibrary/BaseLibrary/BaseLibrary --no-restore
+      run: dotnet build ./BaseLibrary/BaseLibrary.sln --configuration Release --no-restore
   
 
   
