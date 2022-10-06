@@ -14,8 +14,8 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore ./BaseLibrary/BaseLibrary.sln
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build ./BaseLibrary/BaseLibrary.sln --configuration Release --no-restore
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test ./BaseLibrary/BaseLibrary.sln --no-build --verbosity normal
