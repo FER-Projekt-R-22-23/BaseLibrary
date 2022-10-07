@@ -1,0 +1,28 @@
+name: Publish to Github Nuget Registry
+  
+on:
+  workflow_dispatch:
+  
+jobs:
+  build:
+  
+    runs-on: ubuntu-latest
+      
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore dependencies
+      run: dotnet restore ./BaseLibrary/BaseLibrary.sln
+    - name: Build release
+      run: dotnet build ./BaseLibrary/BaseLibrary.sln --configuration Release --no-restore
+    - name: Test release
+      run: dotnet test ./BaseLibrary/BaseLibrary.sln --no-build --configuration Release --verbosity normal
+    - name: Create Base Nuget package
+      run: dotnet pack ./BaseLibrary/BaseLibrary/BaseLibrary/BaseLibrary.csproj --output nuget-packages --configuration Release
+    - name: Add Nuget source
+      run: dotnet nuget add source --username FER-Projekt-R-22-23 --password ${{ secrets.NUGET_PUBLISH_SECRET }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/FER-Projekt-R-22-23/index.json" 
+    - name: Push Base
+      run: dotnet nuget push ./nuget-packages/BaseLibrary.*.nupkg --source https://nuget.pkg.github.com/FER-Projekt-R-22-23/index.json --api-key ${{ secrets.NUGET_PUBLISH_SECRET }}
