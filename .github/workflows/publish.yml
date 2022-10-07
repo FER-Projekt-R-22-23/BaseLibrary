@@ -21,7 +21,7 @@ jobs:
     - name: Test release
       run: dotnet test ./BaseLibrary/BaseLibrary.sln --no-build --configuration Release --verbosity normal
     - name: Create Base Nuget package
-      run: dotnet pack ./BaseLibrary/BaseLibrary/BaseLibrary/BaseLibrary.csproj --output nuget-packages --configuration Release
+      run: dotnet pack ./BaseLibrary/BaseLibrary/BaseLibrary.csproj --output nuget-packages --configuration Release
     - name: Add Nuget source
       run: dotnet nuget add source --username FER-Projekt-R-22-23 --password ${{ secrets.NUGET_PUBLISH_SECRET }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/FER-Projekt-R-22-23/index.json" 
     - name: Push Base
