@@ -2,7 +2,7 @@
 
 public enum ResultTypes
 {
-    SUCCESS,
     FAILURE,
+    SUCCESS,
     EXCEPTION
 }

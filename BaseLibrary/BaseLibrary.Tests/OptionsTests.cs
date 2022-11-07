@@ -4,6 +4,21 @@ namespace BaseLibrary.Tests;
 
 public class OptionsTests
 {
+
+    [Fact(DisplayName = "Create Option as default None")]
+    public void CreateOption_AsDefault()
+    {
+        Option<object> objectOption = default;
+        Option<int> valueOption = default;
+
+        Assert.False(objectOption.IsSome);
+        Assert.False(objectOption);
+        Assert.True(objectOption.IsNone);
+        Assert.False(valueOption.IsSome);
+        Assert.False(valueOption);
+        Assert.True(valueOption.IsNone);
+    }
+
     [Fact(DisplayName = "Create Option with integer data")]
     public void CreateOption_AsSomeInteger()
     {

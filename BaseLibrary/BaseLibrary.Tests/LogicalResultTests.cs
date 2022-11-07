@@ -1,6 +1,16 @@
 ﻿namespace BaseLibrary.Tests;
 public class LogicalResultTests
 {
+    [Fact(DisplayName = "Create Result with data as default Failure")]
+    public void CreateResult_AsDefault()
+    {
+        Result result = default;
+
+        Assert.False(result.IsSuccess);
+        Assert.False(result);
+        Assert.True(result.IsFailure);
+    }
+
     [Fact(DisplayName = "Create success Result")]
     public void CreateResult_AsSuccess()
     {

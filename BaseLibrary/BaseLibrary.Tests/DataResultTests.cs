@@ -1,6 +1,20 @@
 ﻿namespace BaseLibrary.Tests;
 public class DataResultTests
 {
+    [Fact(DisplayName = "Create Result with data as default Failure")]
+    public void CreateResult_AsDefault()
+    {
+        Result<object> objectResult = default;
+        Result<int> valueResult = default;
+
+        Assert.False(objectResult.IsSuccess);
+        Assert.False(objectResult);
+        Assert.True(objectResult.IsFailure);
+        Assert.False(valueResult.IsSuccess);
+        Assert.False(valueResult);
+        Assert.True(valueResult.IsFailure);
+    }
+
     [Fact(DisplayName = "Create Result with integer data")]
     public void CreateResult_AsSuccessInteger()
     {
